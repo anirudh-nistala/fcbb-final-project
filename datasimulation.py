@@ -13,10 +13,24 @@ taxon_1	chrom2	1	2	1	1
 taxon_1	chrom2	2	3	1	1
 """
 
+def generate_random_samples(num_samples, num_chromosomes):
+    return 0
+
 def main():
+    # Randomize
     np.random.seed(3)
+    
+    # Set constants
     num_samples = 10
     num_chromosomes = 4
+    mutation_prob = 0.15 # mutation chance
+    survival_prob = 0.05
+    
+    return 0
+
+if __name__ == "__main__":
+    main()
+    
     
     
 
