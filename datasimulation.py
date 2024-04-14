@@ -17,14 +17,15 @@ def generate_random_samples(num_samples, num_chromosomes):
     return 0
 
 class Cell:
-    def __init__(self, num_chromosomes, chromosome_length):
+    def __init__(self, num_chromosomes, chromosome_length, copy_from=None):
         self.num_chromosomes = num_chromosomes
         self.chromosome_length = chromosome_length
-        self.genome = np.zeros((num_chromosomes, chromosome_length), dtype=int)  # Initialize genome with all zeros
-    
-    def grow(self):
-        # Simulate cell growth
-        pass
+        if copy_from is None:
+            self.genome_a = np.zeros((num_chromosomes, chromosome_length), dtype=int)  # Initialize genome a with all zeros
+            self.genome_b = np.zeros((num_chromosomes, chromosome_length), dtype=int)  # Initialize genome b with all zeros
+        else:
+            self.genome_a = np.copy(copy_from.genome_a)
+            self.genome_b = np.copy(copy_from.genome_b)
     
     def introduce_mutation(self, mutation_rate):
         # Introduce mutations with a certain probability
@@ -32,27 +33,24 @@ class Cell:
             for j in range(self.chromosome_length):
                 if np.random.rand() < mutation_rate:
                     # Mutate chromosome i, position j
-                    self.genome[i, j] = np.random.randint(0, 2)  # Random mutation (0 or 1)
+                    self.genome_a[i, j] = 1  # Random mutation
+                if np.random.rand() < mutation_rate:
+                    self.genome_b[i, j] = 1
 
-def simulate(num_generations, num_cells, num_chromosomes, chromosome_length, mutation_rate):
+def simulate(num_generations, num_cells, num_chromosomes, chromosome_length, mutation_rate, growth_rate):
     # Initialize cells
     cells = [Cell(num_chromosomes, chromosome_length) for _ in range(num_cells)]
     
     # Simulate multiple generations
     for generation in range(num_generations):
-        print(f"Generation {generation + 1}:")
-        
-        # Grow each cell
-        for cell in cells:
-            cell.grow()
         
         # Introduce mutations
         for cell in cells:
+            if np.random.rand() < growth_rate:
+                cells.append(Cell(num_chromosomes, chromosome_length, cell))
             cell.introduce_mutation(mutation_rate)
-        
-        # Print the state of each cell
-        for i, cell in enumerate(cells):
-            print(f"Cell {i + 1}: {cell.genome}")
+
+    return cells
 
 
 def main():
@@ -60,14 +58,30 @@ def main():
     np.random.seed(3)
     
     # Parameters
-    num_generations = 5
+    num_generations = 10
     num_cells = 3
     num_chromosomes = 4
-    mutation_rate = 0.5
-    chromosome_length = 50
+    mutation_rate = 0.01
+    growth_rate = 0.2
+    chromosome_length = 10
 
     # Simulate
-    simulate(num_generations, num_cells, num_chromosomes, chromosome_length, mutation_rate)
+    cells = simulate(num_generations, num_cells, num_chromosomes, chromosome_length, mutation_rate, growth_rate)
+
+    # Output cells as tsv
+    file_name = "output.tsv"
+    with open(file_name, "w") as f:
+        f.write("sample_id\tchrom\tstart\tend\tcn_a\tcn_b\n")  # Write header
+        for idx, cell in enumerate(cells):
+            sample_id = f"sample_{idx + 1}"
+            for chrom_idx in range(num_chromosomes):
+                for start, end in zip(range(0, chromosome_length, 1), range(1, chromosome_length + 1, 1)):
+                    chrom = f"chrom{chrom_idx + 1}"
+                    cn_a = int(cell.genome_a[chrom_idx, start:end])
+                    cn_b = int(cell.genome_b[chrom_idx, start:end])
+                    f.write(f"{sample_id}\t{chrom}\t{start}\t{end}\t{cn_a}\t{cn_b}\n")
+    print(f"Data has been written to '{file_name}'")
+    
 
 if __name__ == "__main__":
     main()
