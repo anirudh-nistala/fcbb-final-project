@@ -3,49 +3,49 @@
     <clade>
       <branch_length>0</branch_length>
       <clade>
-        <name>internal5</name>
-        <branch_length>11.0</branch_length>
+        <name>internal4</name>
+        <branch_length>3.0</branch_length>
         <clade>
           <name>internal6</name>
-          <branch_length>8.0</branch_length>
+          <branch_length>7.0</branch_length>
           <clade>
             <name>internal7</name>
-            <branch_length>6.0</branch_length>
+            <branch_length>3.0</branch_length>
             <clade>
               <name>sample_6</name>
-              <branch_length>9.0</branch_length>
+              <branch_length>11.0</branch_length>
             </clade>
             <clade>
-              <name>internal4</name>
-              <branch_length>10.0</branch_length>
+              <name>internal5</name>
+              <branch_length>7.0</branch_length>
               <clade>
                 <name>sample_1</name>
-                <branch_length>9.0</branch_length>
+                <branch_length>11.0</branch_length>
               </clade>
               <clade>
                 <name>sample_5</name>
-                <branch_length>7.0</branch_length>
+                <branch_length>9.0</branch_length>
               </clade>
             </clade>
           </clade>
           <clade>
             <name>sample_3</name>
-            <branch_length>14.0</branch_length>
+            <branch_length>15.0</branch_length>
           </clade>
         </clade>
         <clade>
           <name>internal3</name>
-          <branch_length>13.0</branch_length>
+          <branch_length>6.0</branch_length>
           <clade>
             <name>sample_2</name>
-            <branch_length>15.0</branch_length>
+            <branch_length>16.0</branch_length>
           </clade>
           <clade>
             <name>internal2</name>
-            <branch_length>11.0</branch_length>
+            <branch_length>8.0</branch_length>
             <clade>
               <name>sample_4</name>
-              <branch_length>6.0</branch_length>
+              <branch_length>8.0</branch_length>
             </clade>
             <clade>
               <name>internal1</name>
@@ -56,7 +56,7 @@
               </clade>
               <clade>
                 <name>sample_8</name>
-                <branch_length>1.0</branch_length>
+                <branch_length>4.0</branch_length>
               </clade>
             </clade>
           </clade>

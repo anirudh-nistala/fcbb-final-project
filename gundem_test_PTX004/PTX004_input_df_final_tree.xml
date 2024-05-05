@@ -1,0 +1,39 @@
+<phyloxml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.phyloxml.org" xsi:schemaLocation="http://www.phyloxml.org http://www.phyloxml.org/1.10/phyloxml.xsd">
+  <phylogeny rooted="true">
+    <clade>
+      <branch_length>0</branch_length>
+      <clade>
+        <name>internal3</name>
+        <branch_length>88.0</branch_length>
+        <clade>
+          <name>internal1</name>
+          <branch_length>66.0</branch_length>
+          <clade>
+            <name>PerigastricLNMet_A10C-0015_CRUK_PC_0015_M2</name>
+            <branch_length>11.0</branch_length>
+          </clade>
+          <clade>
+            <name>PeriportalLNMet_A10D-0015_CRUK_PC_0015_M3</name>
+            <branch_length>27.0</branch_length>
+          </clade>
+        </clade>
+        <clade>
+          <name>internal2</name>
+          <branch_length>10.0</branch_length>
+          <clade>
+            <name>ProstateCA_A10E-0015_CRUK_PC_0015_T1</name>
+            <branch_length>24.0</branch_length>
+          </clade>
+          <clade>
+            <name>RIliacLNMet_A10A-0015_CRUK_PC_0015_M1</name>
+            <branch_length>14.0</branch_length>
+          </clade>
+        </clade>
+      </clade>
+      <clade>
+        <name>diploid</name>
+        <branch_length>0.0</branch_length>
+      </clade>
+    </clade>
+  </phylogeny>
+</phyloxml>

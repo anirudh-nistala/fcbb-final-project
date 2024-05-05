@@ -44,13 +44,16 @@ def simulate(num_generations, num_cells, num_chromosomes, chromosome_length, mut
     # Simulate multiple generations
     for generation in range(num_generations):
         
-        # Introduce mutations
+        # Introduce mutations and growth
         for cell in cells:
             if np.random.rand() < growth_rate:
                 cells.append(Cell(num_chromosomes, chromosome_length, cell))
             cell.introduce_mutation(mutation_rate)
 
     return cells
+
+def test_samples(cells, num_samples):
+    return np.random.choice(cells, num_samples)
 
 
 def main():
@@ -61,18 +64,20 @@ def main():
     num_generations = 10
     num_cells = 3
     num_chromosomes = 4
-    mutation_rate = 0.01
+    mutation_rate = 0
     growth_rate = 0.2
     chromosome_length = 10
+    clusters = 2
 
     # Simulate
     cells = simulate(num_generations, num_cells, num_chromosomes, chromosome_length, mutation_rate, growth_rate)
+    samples = test_samples(cells, 10)
 
     # Output cells as tsv
-    file_name = "output.tsv"
+    file_name = "test.tsv"
     with open(file_name, "w") as f:
         f.write("sample_id\tchrom\tstart\tend\tcn_a\tcn_b\n")  # Write header
-        for idx, cell in enumerate(cells):
+        for idx, cell in enumerate(samples):
             sample_id = f"sample_{idx + 1}"
             for chrom_idx in range(num_chromosomes):
                 for start, end in zip(range(0, chromosome_length, 1), range(1, chromosome_length + 1, 1)):
