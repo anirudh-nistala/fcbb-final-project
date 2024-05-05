@@ -55,26 +55,42 @@ def simulate(num_generations, num_cells, num_chromosomes, chromosome_length, mut
 def test_samples(cells, num_samples):
     return np.random.choice(cells, num_samples)
 
+def simulate_clusters(num_generations, num_cells, num_chromosomes, chromosome_length, cluster_count, growth_rate):
+    # Initialize cells
+    cells = [Cell(num_chromosomes, chromosome_length) for _ in range(num_cells)]
+
+    # introduce mutations for the number of clusters
+    for i in range(cluster_count):
+        cells[i].introduce_mutation(1)
+
+    # Simulate multiple generation growth
+    for generation in range(num_generations):
+        for cell in cells:
+            if np.random.rand() < growth_rate:
+                cells.append(Cell(num_chromosomes, chromosome_length, cell))
+
+    return cells
 
 def main():
     # Randomize
     np.random.seed(3)
     
     # Parameters
-    num_generations = 10
-    num_cells = 3
+    num_generations = 15
+    num_cells = 4
     num_chromosomes = 4
-    mutation_rate = 0
-    growth_rate = 0.2
+    mutation_rate = 0.001
+    growth_rate = 0.05
     chromosome_length = 10
     clusters = 2
 
     # Simulate
-    cells = simulate(num_generations, num_cells, num_chromosomes, chromosome_length, mutation_rate, growth_rate)
+    #cells = simulate(num_generations, num_cells, num_chromosomes, chromosome_length, mutation_rate, growth_rate)
+    cells = simulate_clusters(num_generations, num_cells, num_chromosomes, chromosome_length, clusters, growth_rate)
     samples = test_samples(cells, 10)
 
     # Output cells as tsv
-    file_name = "test.tsv"
+    file_name = "final_two_cluster.tsv"
     with open(file_name, "w") as f:
         f.write("sample_id\tchrom\tstart\tend\tcn_a\tcn_b\n")  # Write header
         for idx, cell in enumerate(samples):
